@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>登录</title>
@@ -80,174 +80,164 @@
         background: linear-gradient(to bottom, #eeeff9 0%,#3399ff 100%);
     
     }
-    
+
     .a:hover
     {
         background:#268DFF;
     }
-    
+
     </style>
 
     <h1 align="center">欢迎注册</h1>
     
-    <div id="app" style="width: 500px;">
+    <div id="app" style="width: 1000px;">
    
-        用&nbsp&nbsp户&nbsp&nbsp名：<input v-model='userName' type="text"  placeholder="请输入用户名" @blur="validate1()"><br>
-     
-        密&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp码：<input v-model='userPassword' type="text"  placeholder="请输入密码" @blur="validate2()"><br>
-
-        确认密码：<input v-model='userCheckPassword' type="text"  placeholder="请再次输入密码" @blur="validate3()"><br>
-      
-        邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱：<input v-model='userEmail' type="text"  placeholder="请输入邮箱" @blur="validate4()"><br>
-   
-        Q&nbsp&nbspQ&nbsp&nbsp&nbsp号：<input v-model='userQQ' type="text"  placeholder="请输入QQ" @blur="validate5()"><br>
-    
-        电话号码：<input v-model='userPhone' type="text"  placeholder="请输入电话号" @blur="validate6()"><br>
+        用&nbsp&nbsp户&nbsp&nbsp名：<input v-model='userName' type="text"  placeholder="请输入用户名" @watch><br>
+        密&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp码：<input v-model='userPassword' type="text"  placeholder="请输入密码"><br>
+        确认密码：<input v-model='userCheckPassword' type="text"  placeholder="请再次输入密码"><br>
+        邮&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp箱：<input v-model='userEmail' type="text"  placeholder="请输入邮箱"><br>
+        Q&nbsp&nbspQ&nbsp&nbsp&nbsp号：<input v-model='userQQ' type="text"  placeholder="请输入QQ"><br>
+        电话号码：<input v-model='userPhone' type="text"  placeholder="请输入电话号"><br>
     
     <button @click="submit" class='a'>提交</button><br>
 
     <h3 align="left">请确认您的信息：</h3>
-        <h4 align="left">您的用户名是:<a href="">{{userName}}</a></h4>
+        
+        <h4 align="left">您的用户名是:<a href="">{{userName}}</a>{{nameError}}</h4>
+        <h4 align="left">您的密码是:<a href="">{{userPassword}}</a>{{passwordError}}</h4>
+        <h4 align="left">再次确认您的密码是:<a href="">{{userCheckPassword}}</a>{{checkPwdError}}</h4>
+        <h4 align="left">您的邮箱是:<a href="">{{userEmail}}</a>{{emailError}}</h4>
+        <h4 align="left">您的QQ号是:<a href="">{{userQQ}}</a>{{qqError}}</h4>
+        <h4 align="left">您的电话号码是:<a href="">{{userPhone}}</a>{{phoneError}}</h4>
 
-        <h4 align="left">您的密码是:<a href="">{{userPassword}}</a></h4>
-
-        <h4 align="left">您的邮箱是:<a href="">{{userEmail}}</a></h4>
-
-        <h4 align="left">您的QQ号是:<a href="">{{userQQ}}</a></h4>
-         
-        <h4 align="left">您的电话号码是:<a href="">{{userPhone}}</a></h4>
-    
     </div>
 
-
-    <script>
+    <script type="text/javascript">
+        Vue.config.productionTip = false    //阻止 vue 在启动时生成生产提示。
         new Vue({
            el: "#app",
            data() {
-               return {
+                
+                return {
                    userName:'',
                    userPassword:'',
                    userCheckPassword:'',
                    userEmail:'',
                    userQQ:'',
-                   userPhone:''
+                   userPhone:'',
+                   nameError:'',
+                   passwordError:'',
+                   checkPwdError:'',
+                   emailError:'',
+                   qqError:'',
+                   phoneError:''
+                   
                };
-           },
-        
-        methods:{
-            submit(){
+           
+            },
+            methods:{
+                
+                submit(){
                    console.log(this.userName)
                    console.log(this.userPassword)
                    console.log(this.userEmail)
                    console.log(this.userQQ)
                    console.log(this.userPhone)
-                   
                    alert(this.userName+"\n"+this.userPassword+"\n"+this.userEmail+"\n"+this.userQQ+"\n"+this.userPhone)
-                   
-                   
                 },
-            
-                validate1(){
-                       
-                    if(this.userName.length<6||this.userName==null||this.userName==''){
-                        alert("用户名长度不能小于6且不能为空!");
-                    }
-
-                },
-
-                validate2(){
-                       
-                    if(this.userPassword==null||this.userPassword==''){
-                        alert("密码不能为空!");
-                       }
-   
-                   },
-
-                validate3(){
-                       
-                    if(this.userCheckPassword==null||this.userCheckPassword==''){
-                           alert("再次输入密码不能为空!");
-                       }else if(this.userCheckPassword!=this.userPassword){
-                           alert("两次密码输入不一致");
-                       }
-   
-                   },
-
-                validate4(){
-                       
-                    if(this.userEmail==null||this.userEmail==''){
-                           alert("邮箱不能为空！");
-                        }
-      
-                    },
-                
-                validate5(){
-                       
-                    if(this.userQQ.length<5||this.userQQ==null||this.userQQ==''){
-                        alert("QQ号长度不能小于5且不能为空！");
-                       }
-   
-                   },
-
-                validate6(){
-                       
-                       if(this.userPhone>11){
-                        alert("电话号码长度不能大于11！");
-                          }else if(this.userPhone==null||this.userPhone==''){
-                            alert("电话号码不能为空！")
-                          }
-      
-                      }
 
            },
-
-        watch:{
-            userName:function(){
-
-                this.userName=this.userName.replace(/[\W]/g,'');
+            watch:{
                 
+                userName:{
+                    handler(newName,oldName){
+                        var pattern = /^[A-Za-z0-9]+$/i; //使用test函数配合正则表达式和watch的监听效果进行对用户输入数据的格式判断
+                        result=pattern.test(this.userName);
+                        if(!result){
+                            this.userName=newName
+                            this.nameError="用户名格式输入错误或为空，请检查并重新输入后再提交！"
+                        }else{
+                            this.userName=newName
+                            this.nameError=''
+                        }
                 },
-
-            userPassword:function(){
-
-                this.userPassword=this.userPassword.replace(/[\W]/g,'');
-
+            },  
+                userPassword:{
+                    handler(newPassword,oldPassword){
+                        var pattern = /^[A-Za-z0-9]+$/i;
+                        result=pattern.test(this.userPassword);
+                        console.log(result)
+                        if(!result){
+                        this.userPassword=newPassword
+                        this.passwordError="密码格式输入错误或为空，请检查并重新输入后再提交！"
+                        }else{
+                            this.userPassword=newPassword
+                            this.passwordError=''
+                        }
                 },
-
-            userEmail:function(){
-
-                this.userEmail=this.userEmail.replace(/^[a-zA-Z1-9]\w{1,}@[a-zA-Z1-9]{2,}(\.(com|cn|net)){1,2}$/g,'');
-
+            },
+                userCheckPassword:{
+                    handler(newCheckPassword,oldCheckPassword){
+                        var pattern = /^[A-Za-z0-9]+$/i;
+                        result=pattern.test(this.userCheckPassword);
+                        console.log(result)
+                        if(!result|this.userCheckPassword!=this.userPassword){
+                        this.userCheckPassword=newCheckPassword
+                        this.checkPwdError="密码两次输入不一致或为空，请检查并重新输入后再提交！"
+                        }else{
+                            this.userCheckPassword=newCheckPassword
+                            this.checkPwdError=''
+                        }
                 },
-            
-            userQQ:function(){
+            },
+                userEmail:{
+                    handler(newEmail,oldEmail){
+                        var pattern = /^[a-zA-Z1-9]\w{1,}@[a-zA-Z1-9]{2,}(\.(com|cn|net)){1,2}$/i;
+                        result=pattern.test(this.userEmail);
+                        if(!result){
+                        this.userEmail=newEmail
+                        this.emailError="邮箱输入格式错误或为空，请检查并重新输入后再提交！"
+                        }else{
+                            this.userEmail=newEmail
+                            this.emailError=''
+                        }
+                },
+            },
+                userQQ:{
                     
-                this.userQQ = this.userQQ.replace(/[^\d]/g,'');
-   
+                    handler(newQQ,oldQQ){
+                        var pattern = /[1-9][0-9]{4,}/i;
+                        result=pattern.test(this.userQQ);
+                        if(!result){
+                        this.userQQ=newQQ
+                        this.qqError="QQ号码输入格式错误或为空，请检查并重新输入后再提交！"
+                        }else{
+                            this.userQQ=newQQ
+                            this.qqError=''
+                        }
                 },
-            userPhone:function(){
+            },
+                userPhone:{
+                    
+                    handler(newPhone,oldPhone){
+                        var pattern = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/i;
+                        result=pattern.test(this.userPhone);
+                        if(!result){
+                        this.userPhone=newPhone
+                        this.phoneError="手机号码输入格式错误或为空，请检查并重新输入后再提交！"
+                        }else{
+                            this.userPhone=newPhone
+                            this.phoneError=''
+                        }
+                },
 
-                this.userPhone = this.userPhone.replace(/^((0\d{2,3}-\d{7,8})|(1[34578]\d{9}))$/g,'');
-
-                }
-            
             }
-        
             
-                
+                    }
                 })
   
    </script>
-
-
-
-
-
-
-
-
 </head>
 <body>
-    
 </body>
 </html>
